@@ -1,14 +1,5 @@
 <?php
-function checkVar($a){
-    if (isset($a) AND trim($a) !='' AND is_numeric(trim($a))){
-        return trim($a);
-    }
-    else {
-        exit('Problem!!!');
-    }
-
-}
-
+require_once 'functions.php';
 //var_dump($_GET);
 // if (isset($_GET['n1']) AND trim($_GET['n1']) !=''){
 //     $n1 = trim($_GET['n1']);
@@ -22,7 +13,6 @@ function checkVar($a){
 // else {
 //     exit('Problem!!!');
 // }
-
 $n1 = checkVar($_GET['n1']);
 $n2 = checkVar($_GET['n2']);
 
