@@ -27,16 +27,17 @@
                                 if ($active) {
                                     echo '<div class="carousel-item active">';
                                     $active = false;
-                                } else {
+                                }
+                                else {
                                     echo '<div class="carousel-item">';
                                 }
-                                echo '<img class="d-block w-100" src="'.$dir.'/'.$file'" alt="First slide"></dir>';
+                                echo '<img class="d-block w-100" src="'.$dir.'/'.$file.'" alt="First slide"></div>';
                             }
                         }
-
                         closedir($openDir);
                     }
                     ?>
+
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
