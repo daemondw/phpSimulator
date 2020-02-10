@@ -17,6 +17,8 @@ require_once 'config.php';
 require_once 'function.php';
 
 $conn = connect();
+
+// Обновление данных
 $id = 2;
 $newName = 'Бананы';
 $sql = "UPDATE goods SET name='".$newName."' WHERE id=".$id;
@@ -27,6 +29,17 @@ if (mysqli_query($conn, $sql)) {
     echo "Error updating record: " . mysqli_error($conn);
 }
 
+// Вставка данных
+
+$sql = "INSERT INTO goods (name, description, cost, amount, image)
+VALUES ('cherry', 'red', 23, 445, 'cherry.png')";
+
+if (mysqli_query($conn, $sql)) {
+    echo '<br>';
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
 
 $a = select($conn);
 
