@@ -10,7 +10,7 @@ function connect() {
 }
 
 function select($conn) {
-    $sql = "SELECT * FROM goods";
+    $sql = "SELECT * FROM info";
     $result = mysqli_query($conn, $sql);
 
     $a = array();
