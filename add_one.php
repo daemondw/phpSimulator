@@ -44,7 +44,7 @@ if (isset($_POST['title']) AND $_POST['title'] != '') {
 
 //echo '<pre>';
 //print_r($_FILES);
-    move_uploaded_file($_FILES['image']['tmp_name'], 'image/' . $_FILES['image']['name']);
+//    move_uploaded_file($_FILES['image']['tmp_name'], 'image/' . $_FILES['image']['name']);
 
     $conn = connect();
 
@@ -52,6 +52,7 @@ if (isset($_POST['title']) AND $_POST['title'] != '') {
 VALUES ('" . $title . "', '" . $descrMin . "', '" . $description . "', '" . $_FILES['image']['name'] . "')";
 
     if (mysqli_query($conn, $sql)) {
+        setcookie('bd_create_success', 1, time()+10);
         header('Location: /course-php.de');
 //        echo "New record created successfully";
     } else {
