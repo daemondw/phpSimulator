@@ -35,8 +35,32 @@ require_once 'core/function.php';
 //echo '</pre>';
 //
 //$close($conn);
-?>
 
+if (isset($_POST['title']) AND $_POST['title'] != '') {
+
+    $title = $_POST['title'];
+    $descrMin = $_POST['descr_min'];
+    $description = $_POST['description'];
+
+//echo '<pre>';
+//print_r($_FILES);
+    move_uploaded_file($_FILES['image']['tmp_name'], 'image/' . $_FILES['image']['name']);
+
+    $conn = connect();
+
+    $sql = "INSERT INTO info (title, descr_min, description, image)
+VALUES ('" . $title . "', '" . $descrMin . "', '" . $description . "', '" . $_FILES['image']['name'] . "')";
+
+    if (mysqli_query($conn, $sql)) {
+        header('Location: /course-php.de');
+//        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+    close($conn);
+}
+?>
 
 <form action="" method="POST">
     <p>Title: <input type="text" name="title"></p>
@@ -45,41 +69,12 @@ require_once 'core/function.php';
     <p>Description:</p>
     <textarea name="description"></textarea>
 
-<!--    <p>Photo: <input type="File" name="image"></p>-->
+    <!--    <p>Photo: <input type="File" name="image"></p>-->
 
     <p><input type="submit" value="add"></p>
 </form>
 
-<?php
 
-if (isset($_POST['title']) AND $_POST['title'] !='') {
-
-$title = $_POST['title'];
-$descrMin = $_POST['descr_min'];
-$description = $_POST['description'];
-
-//echo '<pre>';
-//print_r($_FILES);
-move_uploaded_file($_FILES['image']['tmp_name'], 'image/'.$_FILES['image']['name']);
-
-$conn = connect();
-
-$sql = "INSERT INTO info (title, descr_min, description, image)
-VALUES ('".$title."', '".$descrMin."', '".$description."', '".$_FILES['image']['name']."')";
-
-if (mysqli_query($conn, $sql)) {
-    echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-
-close($conn);
-}
-
-
-
-
-?>
 
 
 
