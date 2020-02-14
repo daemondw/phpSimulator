@@ -42,18 +42,16 @@ if (isset($_POST['title']) AND $_POST['title'] != '') {
     $descrMin = $_POST['descr_min'];
     $description = $_POST['description'];
 
-//echo '<pre>';
-//print_r($_FILES);
-//    move_uploaded_file($_FILES['image']['tmp_name'], 'image/' . $_FILES['image']['name']);
+    move_uploaded_file($_FILES['image']['tmp_name'], 'image/'.$_FILES['image']['name']);
 
     $conn = connect();
+
     $sql = "INSERT INTO info (title, descr_min, description, image)
-VALUES ('" . $title . "', '" . $descrMin . "', '" . $description . "', '" . $_FILES['image']['name'] . "')";
+VALUES ('".$title."', '".$descrMin."', '".$description."', '".$_FILES['image']['name']."')";
 
     if (mysqli_query($conn, $sql)) {
         setcookie('bd_create_success', 1, time()+10);
-        header('Location: /course-php.de');
-//        echo "New record created successfully";
+        header('Location: /course-php.de/admin.php');
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
@@ -61,14 +59,15 @@ VALUES ('" . $title . "', '" . $descrMin . "', '" . $description . "', '" . $_FI
 }
 ?>
 
-<form action="" method="POST">
+<h2>Create post</h2>
+<form action="" method="POST" enctype="multipart/form-data">
     <p>Title: <input type="text" name="title"></p>
     <p>Min description:</p>
     <textarea name="descr_min"></textarea>
     <p>Description:</p>
     <textarea name="description"></textarea>
 
-    <!--    <p>Photo: <input type="File" name="image"></p>-->
+    <p>Photo: <input type="File" name="image"></p>
 
     <p><input type="submit" value="add"></p>
 </form>
